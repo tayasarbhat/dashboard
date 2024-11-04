@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- Existing head content -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activations Dashboard</title>
@@ -10,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Existing CSS styles */
         .clock {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -72,6 +70,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem;
         }
 
         .stat-card:hover {
@@ -92,50 +91,85 @@
             background-size: 200% 200%;
             animation: gradient 8s ease infinite;
         }
-        /* Add hover effect for table data cells */
-.table-hover-effect {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.table-hover-effect:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(31, 38, 135, 0.18);
-}
-
 
         @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .text-lg {
+                font-size: 1rem;
+            }
+
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+
+            .text-4xl {
+                font-size: 1.75rem;
+            }
+
+            .px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .py-4 {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .p-8 {
+                padding: 1.5rem;
+            }
+
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .table-row-hover {
+                padding: 0.5rem;
+            }
         }
     </style>
 </head>
+
 <body class="min-h-screen">
     <!-- Header -->
     <header class="sticky top-0 z-50 glass-card border-b border-indigo-100/20">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
                 <div>
-                    <h1 class="text-4xl text-indigo-600/70 font-bold gradient-text tracking-tight">
-                        Albatross Communication Service 
-                        <h2 class="text-3xl  text-red-600/70 font-bold gradient-text tracking-tight"> Activations Dashboard </h2>
+                    <h1 class="text-3xl md:text-4xl text-red-600/70 font-bold gradient-text tracking-tight">
+                        Albatross Communication Service
                     </h1>
-                    <div class="flex items-center gap-4 mt-2">
-                        <div class="clock px-4 py-2 rounded-xl flex items-center gap-3">
+                    <h2 class="text-2xl md:text-3xl text-indigo-600/70 font-bold gradient-text tracking-tight">
+                        Activations Dashboard
+                    </h2>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 md:gap-4 mt-2">
+                        <div class="clock px-3 py-2 rounded-xl flex items-center gap-2 md:gap-3">
                             <i data-lucide="clock" class="w-5 h-5 text-indigo-600"></i>
-                            <span class="time-text font-semibold text-lg" id="current-time">00:00:00</span>
+                            <span class="time-text font-semibold text-base md:text-lg" id="current-time">00:00:00</span>
                         </div>
-                        <div class="date-text flex items-center gap-3">
+                        <div class="date-text flex items-center gap-2 md:gap-3">
                             <i data-lucide="calendar" class="w-5 h-5 text-indigo-600"></i>
-                            <span class="font-medium text-indigo-600/70" id="current-date"></span>
+                            <span class="font-medium text-sm md:text-base text-indigo-600/70" id="current-date"></span>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center gap-6">
-                    <div class="flex items-center gap-3 bg-indigo-50/50 px-6 py-2.5 rounded-full shadow-sm border border-indigo-100/30">
+                <div class="flex items-center gap-3 md:gap-6 mt-4 md:mt-0">
+                    <div class="flex items-center gap-2 md:gap-3 bg-indigo-50/50 px-4 py-2 md:px-6 md:py-2.5 rounded-full shadow-sm border border-indigo-100/30">
                         <i data-lucide="trending-up" class="w-5 h-5 text-indigo-600"></i>
-                        <span class="text-sm font-semibold text-indigo-700" id="completion-percentage">0% Complete</span>
+                        <span class="text-xs md:text-sm font-semibold text-indigo-700" id="completion-percentage">0% Complete</span>
                     </div>
                     <button class="p-2.5 rounded-full hover:bg-indigo-50/50 transition-all duration-300">
                         <i data-lucide="settings" class="w-5 h-5 text-indigo-600"></i>
@@ -144,78 +178,75 @@
             </div>
         </div>
     </header>
-    
+
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 md:py-8">
         <!-- Statistics Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <!-- Total Agents Card -->
-            <div class="stat-card rounded-2xl p-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
+            <div class="stat-card rounded-2xl p-4 md:p-8">
                 <div class="flex items-center">
-                    <div class="gradient-bg p-4 rounded-xl shadow-lg">
-                        <i data-lucide="users" class="w-7 h-7 text-white"></i>
+                    <div class="gradient-bg p-3 md:p-4 rounded-xl shadow-lg">
+                        <i data-lucide="users" class="w-5 md:w-7 h-5 md:h-7 text-white"></i>
                     </div>
-                    <div class="ml-6">
-                        <p class="text-sm font-medium text-indigo-600/70">Total Agents</p>
-                        <p class="text-3xl font-bold text-gray-900 stat-value" id="total-agents">14</p>
+                    <div class="ml-4 md:ml-6">
+                        <p class="text-xs md:text-sm font-medium text-indigo-600/70">Total Agents</p>
+                        <p class="text-2xl md:text-3xl font-bold text-gray-900" id="total-agents">14</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Total Activations Card -->
-            <div class="stat-card rounded-2xl p-8">
+
+            <div class="stat-card rounded-2xl p-4 md:p-8">
                 <div class="flex items-center">
-                    <div class="gradient-bg p-4 rounded-xl shadow-lg">
-                        <i data-lucide="award" class="w-7 h-7 text-white"></i>
+                    <div class="gradient-bg p-3 md:p-4 rounded-xl shadow-lg">
+                        <i data-lucide="award" class="w-5 md:w-7 h-5 md:h-7 text-white"></i>
                     </div>
-                    <div class="ml-6">
-                        <p class="text-sm font-medium text-indigo-600/70">Total Activations</p>
-                        <p class="text-3xl font-bold text-gray-900 stat-value" id="total-activations">0</p>
+                    <div class="ml-4 md:ml-6">
+                        <p class="text-xs md:text-sm font-medium text-indigo-600/70">Total Activations</p>
+                        <p class="text-2xl md:text-3xl font-bold text-gray-900" id="total-activations">0</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Remaining Target Card -->
-            <div class="stat-card rounded-2xl p-8">
+
+            <div class="stat-card rounded-2xl p-4 md:p-8">
                 <div class="flex items-center">
-                    <div class="gradient-bg p-4 rounded-xl shadow-lg">
-                        <i data-lucide="target" class="w-7 h-7 text-white"></i>
+                    <div class="gradient-bg p-3 md:p-4 rounded-xl shadow-lg">
+                        <i data-lucide="target" class="w-5 md:w-7 h-5 md:h-7 text-white"></i>
                     </div>
-                    <div class="ml-6">
-                        <p class="text-sm font-medium text-indigo-600/70">Remaining Target</p>
-                        <p class="text-3xl font-bold text-gray-900 stat-value" id="remaining-target">0</p>
+                    <div class="ml-4 md:ml-6">
+                        <p class="text-xs md:text-sm font-medium text-indigo-600/70">Remaining Target</p>
+                        <p class="text-2xl md:text-3xl font-bold text-gray-900" id="remaining-target">0</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Agents Table -->
-        <div class="glass-card rounded-2xl p-8 shadow-lg">
+        <div class="glass-card rounded-2xl p-4 md:p-8 shadow-lg">
             <div class="overflow-x-auto">
-                <table class="modern-table w-full" id="agents-table">
+                <table class="modern-table w-full text-xs md:text-sm" id="agents-table">
                     <thead>
                         <tr>
-                            <th class="text-left px-6 py-4 text-sm font-semibold text-indigo-600 uppercase tracking-wider">Agent Name</th>
-                            <th class="text-center px-6 py-4 text-sm font-semibold text-emerald-600 uppercase tracking-wider">Silver</th>
-                            <th class="text-center px-6 py-4 text-sm font-semibold text-amber-600 uppercase tracking-wider">Gold</th>
-                            <th class="text-center px-6 py-4 text-sm font-semibold text-violet-600 uppercase tracking-wider">Platinum</th>
-                            <th class="text-center px-6 py-4 text-sm font-semibold text-blue-600 uppercase tracking-wider">Standard</th>
-                            <th class="text-left px-6 py-4 text-sm font-semibold text-indigo-600 uppercase tracking-wider">Progress</th>
+                            <th class="text-left px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-semibold text-indigo-600 uppercase tracking-wider">Agent Name</th>
+                            <th class="text-center px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-semibold text-emerald-600 uppercase tracking-wider">Silver</th>
+                            <th class="text-center px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-semibold text-amber-600 uppercase tracking-wider">Gold</th>
+                            <th class="text-center px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-semibold text-violet-600 uppercase tracking-wider">Platinum</th>
+                            <th class="text-center px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-wider">Standard</th>
+                            <th class="text-left px-2 md:px-6 py-2 md:py-4 text-xs md:text-sm font-semibold text-indigo-600 uppercase tracking-wider">Progress</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y-8 divide-transparent" id="agents-body">
+                    <tbody class="divide-y-2 md:divide-y-8 divide-transparent" id="agents-body">
                         <!-- Table rows will be populated by JavaScript -->
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td class="px-6 py-4 font-semibold text-gray-900">Total</td>
-                            <td class="px-6 py-4 text-center font-bold text-emerald-600" id="total-silver">0</td>
-                            <td class="px-6 py-4 text-center font-bold text-amber-600" id="total-gold">0</td>
-                            <td class="px-6 py-4 text-center font-bold text-violet-600" id="total-platinum">0</td>
-                            <td class="px-6 py-4 text-center font-bold text-blue-600" id="total-standard">0</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <i data-lucide="activity" class="w-5 h-5 text-indigo-500"></i>
+                            <td class="px-2 md:px-6 py-2 md:py-4 font-semibold text-gray-900">Total</td>
+                            <td class="px-2 md:px-6 py-2 md:py-4 text-center font-bold text-emerald-600" id="total-silver">0</td>
+                            <td class="px-2 md:px-6 py-2 md:py-4 text-center font-bold text-amber-600" id="total-gold">0</td>
+                            <td class="px-2 md:px-6 py-2 md:py-4 text-center font-bold text-violet-600" id="total-platinum">0</td>
+                            <td class="px-2 md:px-6 py-2 md:py-4 text-center font-bold text-blue-600" id="total-standard">0</td>
+                            <td class="px-2 md:px-6 py-2 md:py-4">
+                                <div class="flex items-center gap-2 md:gap-3">
+                                    <i data-lucide="activity" class="w-4 md:w-5 h-4 md:h-5 text-indigo-500"></i>
                                     <span class="font-semibold text-gray-900" id="total-progress">0/0 Total Activations</span>
                                 </div>
                             </td>
@@ -227,26 +258,24 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-6 text-center text-indigo-600/50 text-sm font-medium">
+    <footer class="py-4 text-center text-indigo-600/50 text-xs md:text-sm font-medium">
         &copy; 2024 ACS. All rights reserved.
     </footer>
 
     <!-- Scripts -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
 
-        // Clock and Date Functions
         function updateClock() {
             const now = new Date();
-            const time = now.toLocaleTimeString('en-US', { 
+            const time = now.toLocaleTimeString('en-US', {
                 hour12: true,
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit'
             });
-            
+
             const date = now.toLocaleDateString('en-US', {
                 weekday: 'long',
                 year: 'numeric',
@@ -258,27 +287,21 @@
             document.getElementById('current-date').textContent = date;
         }
 
-        // Update clock immediately and then every second
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Fetch data from Google Apps Script Web App
         fetch('https://script.google.com/macros/s/AKfycbx96S87lnh7haL6v5eajGkeRi_3-wTmXIvf21zQuV7jFUejC21ysKBi00orzM8Hm8pQnA/exec')
             .then(response => response.json())
             .then(data => {
-                // Map the data to the agents array
-                const agents = data.map(row => {
-                    return {
-                        name: row['Agent Name'] || '',
-                        silver: Number(row['Silver']) || 0,
-                        gold: Number(row['Gold']) || 0,
-                        platinum: Number(row['Platinum']) || 0,
-                        standard: Number(row['Standard']) || 0
-                    };
-                });
+                const agents = data.map(row => ({
+                    name: row['Agent Name'] || '',
+                    silver: Number(row['Silver']) || 0,
+                    gold: Number(row['Gold']) || 0,
+                    platinum: Number(row['Platinum']) || 0,
+                    standard: Number(row['Standard']) || 0
+                }));
 
-                // Helper functions
-                const getTotal = (agent) => 
+                const getTotal = (agent) =>
                     agent.silver + agent.gold + agent.platinum + agent.standard;
 
                 const getProgressColor = (total) => {
@@ -306,93 +329,76 @@
                 const getCompletionPercentage = () =>
                     Math.round((getTotalActivations() / (agents.length * 10)) * 100);
 
-                // Populate table with animation delay
-              // Populate table without animation delay
-// Populate table without animation delay
-const tbody = document.getElementById('agents-body');
-tbody.innerHTML = ''; // Clear existing content
-agents.forEach((agent) => {
-   
-    const total = getTotal(agent);
+                const tbody = document.getElementById('agents-body');
+                tbody.innerHTML = '';
+                agents.forEach((agent) => {
+                    const total = getTotal(agent);
+                    let firstLetterContainerClass = 'bg-red-600';
+                    if (total > 3 && total < 7) {
+                        firstLetterContainerClass = 'bg-yellow-500';
+                    } else if (total >= 7) {
+                        firstLetterContainerClass = 'bg-green-600';
+                    }
 
-    // Determine color based on total activations for the first alphabet
-    let firstLetterColorClass = 'text-red-600'; // Default to red
-    if (total > 3 && total < 7) {
-        firstLetterColorClass = 'text-yellow-500'; // Yellow for 4 to 6 activations
-    } else if (total >= 7) {
-        firstLetterColorClass = 'text-green-600'; // Green for 7 or more activations
-    }
+                    const tr = document.createElement('tr');
+                    tr.className = 'shadow-sm table-row-hover';
+                    tr.innerHTML = `
+                        <td class="px-2 md:px-6 py-2 md:py-4">
+                            <div class="flex items-center gap-2 md:gap-4">
+                                <div class="w-10 md:w-12 h-10 md:h-12 rounded-xl ${firstLetterContainerClass} flex items-center justify-center avatar shadow-lg">
+                                    <span class="text-sm md:text-lg font-bold text-white">
+                                        ${agent.name.charAt(0)}
+                                    </span>
+                                </div>
+                                <span class="font-semibold text-gray-900 text-sm md:text-lg">${agent.name}</span>
+                            </div>
+                        </td>
+                        <td class="px-2 md:px-6 py-2 md:py-4 text-center">
+                            <span class="font-semibold text-sm md:text-lg ${agent.silver > 0 ? 'text-emerald-600' : 'text-gray-400'}">${agent.silver}</span>
+                        </td>
+                        <td class="px-2 md:px-6 py-2 md:py-4 text-center">
+                            <span class="font-semibold text-sm md:text-lg ${agent.gold > 0 ? 'text-amber-600' : 'text-gray-400'}">${agent.gold}</span>
+                        </td>
+                        <td class="px-2 md:px-6 py-2 md:py-4 text-center">
+                            <span class="font-semibold text-sm md:text-lg ${agent.platinum > 0 ? 'text-violet-600' : 'text-gray-400'}">${agent.platinum}</span>
+                        </td>
+                        <td class="px-2 md:px-6 py-2 md:py-4 text-center">
+                            <span class="font-semibold text-sm md:text-lg ${agent.standard > 0 ? 'text-blue-600' : 'text-gray-400'}">${agent.standard}</span>
+                        </td>
+                        <td class="px-2 md:px-6 py-2 md:py-4">
+                            <div class="flex items-center gap-2 md:gap-4">
+                                <div class="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                                    <div
+                                        class="h-full progress-bar ${getProgressColor(total)}"
+                                        style="width: ${getProgressWidth(total)}"
+                                    ></div>
+                                </div>
+                                <span class="font-semibold min-w-[50px] md:min-w-[70px] text-sm md:text-lg ${
+                                    total >= 10 ? 'text-emerald-600' : 'text-gray-600'
+                                }">
+                                    ${total}/10
+                                </span>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
 
-    const tr = document.createElement('tr');
-    tr.className = 'shadow-sm';
-    tr.innerHTML = `
-        <td class="px-6 py-4 table-hover-effect">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center avatar shadow-lg">
-                    <span class="text-lg font-bold ${firstLetterColorClass}">
-                        ${agent.name.charAt(0)}
-                    </span>
-                </div>
-                <span class="font-semibold text-gray-900 text-lg">${agent.name}</span>
-            </div>
-        </td>
-        <td class="px-6 py-4 text-center table-hover-effect">
-            <span class="font-semibold text-lg ${agent.silver > 0 ? 'text-emerald-600' : 'text-gray-400'}">${agent.silver}</span>
-        </td>
-        <td class="px-6 py-4 text-center table-hover-effect">
-            <span class="font-semibold text-lg ${agent.gold > 0 ? 'text-amber-600' : 'text-gray-400'}">${agent.gold}</span>
-        </td>
-        <td class="px-6 py-4 text-center table-hover-effect">
-            <span class="font-semibold text-lg ${agent.platinum > 0 ? 'text-violet-600' : 'text-gray-400'}">${agent.platinum}</span>
-        </td>
-        <td class="px-6 py-4 text-center table-hover-effect">
-            <span class="font-semibold text-lg ${agent.standard > 0 ? 'text-blue-600' : 'text-gray-400'}">${agent.standard}</span>
-        </td>
-        <td class="px-6 py-4 table-hover-effect">
-            <div class="flex items-center gap-4">
-                <div class="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
-                    <div
-                        class="h-full progress-bar ${getProgressColor(total)}"
-                        style="width: ${getProgressWidth(total)}"
-                    ></div>
-                </div>
-                <span class="font-semibold min-w-[70px] text-lg ${
-                    total >= 10 ? 'text-emerald-600' : 'text-gray-600'
-                }">
-                    ${total}/10
-                </span>
-            </div>
-        </td>
-    `;
-    tbody.appendChild(tr);
-});
+                document.getElementById('total-agents').textContent = agents.length;
+                document.getElementById('total-activations').textContent = getTotalActivations();
+                document.getElementById('remaining-target').textContent = getRemainingTotal();
+                document.getElementById('completion-percentage').textContent = `${getCompletionPercentage()}% Complete`;
+                document.getElementById('total-progress').textContent = `${getTotalActivations()}/${agents.length * 10} Total Activations`;
 
-
-
-                // Calculate totals for each type
-                const totalSilver = agents.reduce((acc, agent) => acc + agent.silver, 0);
-                const totalGold = agents.reduce((acc, agent) => acc + agent.gold, 0);
-                const totalPlatinum = agents.reduce((acc, agent) => acc + agent.platinum, 0);
-                const totalStandard = agents.reduce((acc, agent) => acc + agent.standard, 0);
-
-                // Update statistics with animation
-                setTimeout(() => {
-                    document.getElementById('total-agents').textContent = agents.length;
-                    document.getElementById('total-activations').textContent = getTotalActivations();
-                    document.getElementById('remaining-target').textContent = getRemainingTotal();
-                    document.getElementById('completion-percentage').textContent = `${getCompletionPercentage()}% Complete`;
-                    document.getElementById('total-progress').textContent = `${getTotalActivations()}/${agents.length * 10} Total Activations`;
-
-                    // Update the footer totals
-                    document.getElementById('total-silver').textContent = totalSilver;
-                    document.getElementById('total-gold').textContent = totalGold;
-                    document.getElementById('total-platinum').textContent = totalPlatinum;
-                    document.getElementById('total-standard').textContent = totalStandard;
-                }, 500);
+                document.getElementById('total-silver').textContent = agents.reduce((acc, agent) => acc + agent.silver, 0);
+                document.getElementById('total-gold').textContent = agents.reduce((acc, agent) => acc + agent.gold, 0);
+                document.getElementById('total-platinum').textContent = agents.reduce((acc, agent) => acc + agent.platinum, 0);
+                document.getElementById('total-standard').textContent = agents.reduce((acc, agent) => acc + agent.standard, 0);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
     </script>
 </body>
+
 </html>
